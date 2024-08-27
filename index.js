@@ -1,11 +1,25 @@
-const { createServer } = require('http');
+// create a server
+const http = require('http'); // CommonJS module import syntax
+// import http from 'http'; // ES6 module import syntax
 
-const server = createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Hello NodeJS!\n');
+// create a server object
+const server = http.createServer((request, response) => {
+    const { url, method } = request;
+
+    if (url === '/') {
+        if(method === 'GET') {
+            return response.end('GET World!');
+        } else if(method === 'POST') {
+            return response.end('POST World!');
+        }
+    } else if(url === '/test') {
+        return response.end('Hello World!');
+    } else {
+        return response.end('Endpoint not found');
+    }
 });
 
-// starts a simple http server locally on port 3000
-server.listen(3000, '127.0.0.1', () => {
-  console.log('Listening on 127.0.0.1:3000');
+// start the server listening for requests
+server.listen(3001, 'localhost', () => {
+    console.log('Server is running on http://localhost:3001');
 });
