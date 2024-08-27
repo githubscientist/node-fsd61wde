@@ -1,0 +1,36 @@
+{
+  "name": "fsd61wde",
+  "version": "1.0.0",
+  "description": "It is a backend repo for the course FSD61WDE.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/githubscientist/node-fsd61wde.git"
+  },
+  "keywords": [
+    "backend",
+    "nodeJS",
+    "expressJS",
+    "mongoDB",
+    "postMan",
+    "VSCodeIDE",
+    "Axios",
+    "body-parser",
+    "cookie-parser",
+    "morgan",
+    "env",
+    "jsonwebtoken",
+    "middleware",
+    "logger"
+  ],
+  "author": "Sathish Gnanaprakasam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/githubscientist/node-fsd61wde/issues"
+  },
+  "homepage": "https://github.com/githubscientist/node-fsd61wde#readme"
+}
