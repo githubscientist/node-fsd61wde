@@ -13,7 +13,7 @@ const server = http.createServer((request, response) => {
             return response.end('POST World!');
         }
     } else if(url === '/test') {
-        return response.end('Hello World!');
+        return response.end('TEST World!');
     } else {
         return response.end('Endpoint not found');
     }
