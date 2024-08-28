@@ -1,25 +1,23 @@
-// create a server
-const http = require('http'); // CommonJS module import syntax
-// import http from 'http'; // ES6 module import syntax
+// import the express module
+const express = require('express');
 
-// create a server object
-const server = http.createServer((request, response) => {
-    const { url, method } = request;
+// create an express application
+const app = express();
 
-    if (url === '/') {
-        if(method === 'GET') {
-            return response.end('GET World!');
-        } else if(method === 'POST') {
-            return response.end('POST World!');
-        }
-    } else if(url === '/test') {
-        return response.end('TEST World!');
-    } else {
-        return response.end('Endpoint not found');
-    }
+// define the routes and their corresponding functions
+app.get('/', (req, res) => {
+    res.send("GET World!");
 });
 
-// start the server listening for requests
-server.listen(3001, 'localhost', () => {
-    console.log('Server is running on http://localhost:3001');
+app.post('/', (req, res) => {
+    res.send("POST World!");
+});
+
+app.get('/test', (req, res) => {
+    res.send("GET Test!");
+});
+
+// start the server by listening on a port for incoming requests
+app.listen(3001, "localhost", () => {
+    console.log("Server is running on http://localhost:3001");
 });
