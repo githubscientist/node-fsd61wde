@@ -1,0 +1,4 @@
+some random text content for testing!
+
+This is a test file for testing purposes. 
+This file is created using javascript fs module.

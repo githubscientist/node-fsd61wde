@@ -52,8 +52,8 @@ Npm is a package manager for the JavaScript programming language. It is the defa
 ## Contents
 
 [x] What is express
-[ ] API methods - GET, POST, PUT, DELETE
-[ ] Request & response objects
+[x] API methods - GET, POST, PUT, DELETE -- PUT and DELETE pending
+[x] Request & response objects - req, res in express in express pending
 [ ] Url & Query parameters
 
 ### What is express
