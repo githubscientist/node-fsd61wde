@@ -1,1 +1,0 @@
-This contents will be copied to fileB.txt

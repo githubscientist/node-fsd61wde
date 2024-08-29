@@ -59,3 +59,77 @@ Npm is a package manager for the JavaScript programming language. It is the defa
 ### What is express
 
 Express.js, or simply Express, is a back end web application framework for Node.js, released as free and open-source software under the MIT License. It is designed for building web applications and APIs.
+
+### Application: Job Portal
+
+#### Database Model Design
+
+##### Entities
+
+- Company
+- Job
+- User
+- Application
+
+##### Relationships
+
+- Company has many jobs
+- Job belongs to a company
+- User has many jobs
+- Job belongs to a user
+- Job has many applications
+- Application belongs to a job
+- Application belongs to a user
+
+#### Attributes
+
+##### Company
+
+- Name
+- Location
+- Email
+- Phone
+- Website
+- createdAt
+- updatedAt
+
+##### Job
+
+- Title
+- Description
+- Location
+- Salary
+- Experience
+- Skills
+- Type
+- CompanyId
+- createdAt
+- updatedAt
+
+##### User
+
+- Name
+- Email
+- Phone
+- Password
+- Role: user, manager, admin
+- createdAt
+- updatedAt
+
+##### Application
+
+- UserId
+- JobId
+- Status: applied, shortlisted, rejected
+- createdAt
+- updatedAt
+
+#### API Endpoints
+
+##### Company
+
+- GET /companies - Get all companies
+- GET /companies/:id - Get company by id
+- POST /companies - Create a company
+- PUT /companies/:id - Update a company
+- DELETE /companies/:id - Delete a company
