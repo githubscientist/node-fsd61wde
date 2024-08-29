@@ -1,4 +1,4 @@
-const companies = [
+let companies = [
     {
         id: 1,
         name: "Google",
@@ -42,7 +42,19 @@ app.use(express.json());
 
 app.get('/companies', (req, res) => {
     res.json(companies);
-})
+});
+
+app.get('/companies/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    const company = companies.find(com => com.id === id);
+
+    if (!company) {
+        res.json({ message: "Company not found" });
+    } 
+
+    res.json(company);
+});
 
 // define the routes and their respective handlers
 app.post('/companies', (req, res) => {
@@ -55,7 +67,29 @@ app.post('/companies', (req, res) => {
     companies.push(company);
 
     res.json({ message: "Company created successfully" });
-})
+});
+
+app.put('/companies/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    const { name } = req.body;
+
+    const company = companies.find(com => com.id === id);
+
+    company.name = name;
+
+    companies = companies.map(com => com.id === id ? company : com);
+
+    res.json({ message: "Company updated successfully" });
+});
+
+app.delete('/companies/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    companies = companies.filter(com => com.id !== id);
+
+    res.json({ message: "Company deleted successfully" });
+});
 
 // start the server by listening on a port for incoming requests
 app.listen(3001, () => {
