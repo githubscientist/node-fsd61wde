@@ -2,7 +2,7 @@ let companies = [
     {
         id: 1,
         name: "Google",
-        location: "Mountain View, California",
+        location: "Seattle, Washington",
         email: "careers@google.com",
         phone: "650-253-0000",
         website: "https://careers.google.com",
@@ -42,6 +42,30 @@ app.use(express.json());
 
 app.get('/companies', (req, res) => {
     res.json(companies);
+});
+
+app.get('/companies/search', (req, res) => {
+    const { id, name, location } = req.query;
+    let company;
+
+    if (id) {
+        company = companies.find(com => com.id === parseInt(id));
+    }
+
+    if (location && !name) {
+        company = companies.filter(com => com.location.toLowerCase() === location.toLowerCase());
+    }
+
+    if (location && name) {
+        company = companies.filter(com => com.location.toLowerCase() === location.toLowerCase());
+        company = company.filter(com => com.name.toLowerCase() === name.toLowerCase());
+    }
+
+    if (!company) {
+        res.json({ message: "Company not found" });
+    }
+
+    res.json(company);
 });
 
 app.get('/companies/:id', (req, res) => {
