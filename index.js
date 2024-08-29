@@ -34,6 +34,21 @@ let companies = [
 // import the express module
 const express = require('express');
 
+// import the mongoose module
+const mongoose = require('mongoose');
+
+// import the dotenv module
+require('dotenv').config();
+
+// connect to the MongoDB database
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => {
+        console.log("Connected to the MongoDB database");
+    })
+    .catch((err) => {
+        console.log("Error connecting to the MongoDB database", err);
+    });
+
 // create an express application
 const app = express();
 
