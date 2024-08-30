@@ -1,105 +1,109 @@
-let companies = [
-    {
-        id: 1,
-        name: "Google",
-        location: "Seattle, Washington",
-        email: "careers@google.com",
-        phone: "650-253-0000",
-        website: "https://careers.google.com",
-        createdAt: "2021-09-01T00:00:00Z",
-        updatedAt: "2021-09-01T00:00:00Z"
-    },
-    {
-        id: 2,
-        name: "Facebook",
-        location: "Menlo Park, California",
-        email: "careers@facebook.com",
-        phone: "650-543-4800",
-        website: "https://www.facebook.com/careers",
-        createdAt: "2021-09-01T00:00:00Z",
-        updatedAt: "2021-09-01T00:00:00Z"
-    },
-    {
-        id: 3,
-        name: "Amazon",
-        location: "Seattle, Washington",
-        email: "careers@amazon.com",
-        phone: "206-266-1000",
-        website: "https://www.amazon.jobs",
-        createdAt: "2021-09-01T00:00:00Z",
-        updatedAt: "2021-09-01T00:00:00Z"
-    },
-];
+// import the Company model
+const Company = require('../models/company');
 
 // create the company controller
 const companyController = {
-    getCompanies: (req, res) => {
-        res.json(companies);
-    },
-    searchCompanies: (req, res) => {
-        const { id, name, location } = req.query;
-        let company;
+    getCompanies: async (req, res) => {
+        try {
+            const companies = await Company.find();
 
-        if (id) {
-            company = companies.find(com => com.id === parseInt(id));
+            res.status(200).json(companies);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+    searchCompanies: async (req, res) => {
+        const { name, location } = req.query;
+
+        const companies = await Company.find({
+            $and: [
+                {
+                    name: {
+                        $regex: name,
+                        $options: 'i'
+                    }
+                },
+                {
+                    location: {
+                        $regex: location,
+                        $options: 'i'
+                    }
+                },
+            ]
+        });
+
+        res.status(200).json(companies);
+    },
+    getCompany: async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            const company = await Company.findById(id);
+
+            if (!company) {
+                return res.status(404).json({ message: "Company not found" });
+            }
+
+            res.status(200).json(company);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+    createCompany: async (req, res) => {
+        try {
+            const company = req.body;
+
+            // create a new company
+            const newCompany = new Company(company);
+
+            // save the company
+            const savedCompany = await newCompany.save();
+
+            res.status(201).json({ message: "Company created successfully", company: savedCompany });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+    updateCompany: async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            const { name, location, email, phone, website } = req.body;
+
+            const companyToUpdate = {
+                name,
+                location,
+                email,
+                phone,
+                website
+            }
+
+            const updatedCompany = await Company.findByIdAndUpdate(id, companyToUpdate, { new: true });
+
+            if (!updatedCompany) {
+                return res.status(404).json({ message: "Company not found" });
+            }
+
+            res.status(200).json({ message: "Company updated successfully", company: updatedCompany });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
         }
 
-        if (location && !name) {
-            company = companies.filter(com => com.location.toLowerCase() === location.toLowerCase());
+    },
+    deleteCompany: async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            const deletedCompany = await Company.findByIdAndDelete(id);
+
+            if (!deletedCompany) {
+                return res.status(404).json({ message: "Company not found" });
+            }
+
+            res.status(200).json({ message: "Company deleted successfully" });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
         }
-
-        if (location && name) {
-            company = companies.filter(com => com.location.toLowerCase() === location.toLowerCase());
-            company = company.filter(com => com.name.toLowerCase() === name.toLowerCase());
-        }
-
-        if (!company) {
-            res.json({ message: "Company not found" });
-        }
-
-        res.json(company);
-    },
-    getCompany: (req, res) => {
-        const id = parseInt(req.params.id);
-
-        const company = companies.find(com => com.id === id);
-
-        if (!company) {
-            res.json({ message: "Company not found" });
-        } 
-
-        res.json(company);
-    },
-    createCompany: (req, res) => {
-        const company = req.body;
-
-        company.id = companies[companies.length - 1].id + 1;
-        company.createdAt = new Date().toISOString();
-        company.updatedAt = new Date().toISOString();
-
-        companies.push(company);
-
-        res.json({ message: "Company created successfully" });
-    },
-    updateCompany: (req, res) => {
-        const id = parseInt(req.params.id);
-
-        const { name } = req.body;
-
-        const company = companies.find(com => com.id === id);
-
-        company.name = name;
-
-        companies = companies.map(com => com.id === id ? company : com);
-
-        res.json({ message: "Company updated successfully" });
-    },
-    deleteCompany: (req, res) => {
-        const id = parseInt(req.params.id);
-
-        companies = companies.filter(com => com.id !== id);
-
-        res.json({ message: "Company deleted successfully" });
     }
 }
 
