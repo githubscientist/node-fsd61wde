@@ -60,6 +60,10 @@ Npm is a package manager for the JavaScript programming language. It is the defa
 
 Express.js, or simply Express, is a back end web application framework for Node.js, released as free and open-source software under the MIT License. It is designed for building web applications and APIs.
 
+### What is middleware
+
+Middleware is a function that has access to the request object (req), 
+
 ### Application: Job Portal
 
 #### Database Model Design
@@ -133,3 +137,4 @@ Express.js, or simply Express, is a back end web application framework for Node.
 - POST /companies - Create a company
 - PUT /companies/:id - Update a company
 - DELETE /companies/:id - Delete a company
+
