@@ -62,7 +62,7 @@ Express.js, or simply Express, is a back end web application framework for Node.
 
 ### What is middleware
 
-Middleware is a function that has access to the request object (req), 
+Middleware is a function that has access to the request object (req),
 
 ### Application: Job Portal
 
@@ -138,35 +138,25 @@ Middleware is a function that has access to the request object (req),
 - PUT /companies/:id - Update a company
 - DELETE /companies/:id - Delete a company
 
-let companies = [
-    {
-        id: 1,
-        name: "Google",
-        location: "Seattle, Washington",
-        email: "careers@google.com",
-        phone: "650-253-0000",
-        website: "https://careers.google.com",
-        createdAt: "2021-09-01T00:00:00Z",
-        updatedAt: "2021-09-01T00:00:00Z"
-    },
-    {
-        id: 2,
-        name: "Facebook",
-        location: "Menlo Park, California",
-        email: "careers@facebook.com",
-        phone: "650-543-4800",
-        website: "https://www.facebook.com/careers",
-        createdAt: "2021-09-01T00:00:00Z",
-        updatedAt: "2021-09-01T00:00:00Z"
-    },
-    {
-        id: 3,
-        name: "Amazon",
-        location: "Seattle, Washington",
-        email: "careers@amazon.com",
-        phone: "206-266-1000",
-        website: "https://www.amazon.jobs",
-        createdAt: "2021-09-01T00:00:00Z",
-        updatedAt: "2021-09-01T00:00:00Z"
-    },
-];
+##### Job
+
+- GET /jobs - Get all jobs
+- GET /jobs/company/:id - Get all jobs by company id
+- POST /jobs/company/:id - Create a job
+- GET /jobs/:id - Get job by id
+- PUT /jobs/:id - Update a job
+- DELETE /jobs/:id - Delete a job
+
+example data:
+
+```
+{
+  "title": "Nodejs Developer",
+  "description": "Nodejs Developer",
+  "location": "Bangalore",
+  "salary": "10LPA",
+  "experience": "2-5 years",
+  "skills": ["Nodejs", "Express", "MongoDB"],
+  "type": "Full-time",
+}
+```

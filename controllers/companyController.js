@@ -5,7 +5,7 @@ const Company = require('../models/company');
 const companyController = {
     getCompanies: async (req, res) => {
         try {
-            const companies = await Company.find();
+            const companies = await Company.find().populate('jobs', '-companyId -__v');
 
             res.status(200).json(companies);
         } catch (error) {
