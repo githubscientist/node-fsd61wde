@@ -62,7 +62,7 @@ Express.js, or simply Express, is a back end web application framework for Node.
 
 ### What is middleware
 
-Middleware is a function that has access to the request object (req),
+Middleware is a function that has access to the request object (req), the response object (res), and the next function in the application's request-response cycle. The next function is a function in the Express router that, when invoked, executes the middleware succeeding the current middleware.
 
 ### Application: Job Portal
 
