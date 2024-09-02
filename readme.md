@@ -66,6 +66,16 @@ Middleware is a function that has access to the request object (req),
 
 ### Application: Job Portal
 
+#### Features
+
+- Companies can create an account
+- Companies can post jobs
+- Users can apply for jobs
+- Users can view all the jobs
+- Users can view all the jobs by company
+- Users can view all the jobs by location
+- Users can view all the jobs by skills
+
 #### Database Model Design
 
 ##### Entities
