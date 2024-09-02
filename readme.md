@@ -157,16 +157,6 @@ Middleware is a function that has access to the request object (req),
 - PUT /jobs/:id - Update a job
 - DELETE /jobs/:id - Delete a job
 
-example data:
+##### Authentication
 
-```
-{
-  "title": "Nodejs Developer",
-  "description": "Nodejs Developer",
-  "location": "Bangalore",
-  "salary": "10LPA",
-  "experience": "2-5 years",
-  "skills": ["Nodejs", "Express", "MongoDB"],
-  "type": "Full-time",
-}
-```
+Authentication is the process of verifying the identity of a user. It is the mechanism of associating an incoming request with a set of identifying credentials, such as the user the request came from, or the token that it was signed with.
