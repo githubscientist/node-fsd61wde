@@ -4,9 +4,17 @@ const companyRouter = require('./routes/companyRoutes');
 const jobRouter = require('./routes/jobRoutes');
 const authRouter = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 // create an express application
 const app = express();
+
+// use the cors middleware
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
 
 // use the express middleware to parse JSON bodies
 app.use(express.json());
