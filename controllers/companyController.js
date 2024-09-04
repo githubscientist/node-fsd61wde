@@ -38,7 +38,7 @@ const companyController = {
         try {
             const { id } = req.params;
 
-            const company = await Company.findById(id);
+            const company = await Company.findById(id).populate('jobs', '-companyId -__v');
 
             if (!company) {
                 return res.status(404).json({ message: "Company not found" });
