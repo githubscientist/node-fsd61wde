@@ -32,6 +32,57 @@ const jobController = {
             res.status(500).json({ message: error.message });
         }
     },
+    getJob: async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            const job = await Job.findById(id).populate('companyId', 'name -_id');
+
+            if (!job) {
+                return res.status(404).json({ message: 'Job not found' });
+            }
+
+            res.status(200).json(job);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+    updateJob: async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            const updatedJob = await Job.findByIdAndUpdate(id, req.body);
+
+            if (!updatedJob) {
+                return res.status(404).json({ message: 'Job not found' });
+            }
+
+            res.status(200).json(updatedJob);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+    deleteJob: async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            const deletedJob = await Job.findByIdAndDelete(id);
+
+            if (!deletedJob) {
+                return res.status(404).json({ message: 'Job not found' });
+            }
+
+            const companyToUpdate = await Company.findById(deletedJob.companyId);
+
+            companyToUpdate.jobs = companyToUpdate.jobs.filter(jobId => jobId.toString() !== id);
+
+            await companyToUpdate.save();
+
+            res.status(200).json(deletedJob);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
 }
 
 module.exports = jobController;

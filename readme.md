@@ -160,3 +160,47 @@ Middleware is a function that has access to the request object (req), the respon
 ##### Authentication
 
 Authentication is the process of verifying the identity of a user. It is the mechanism of associating an incoming request with a set of identifying credentials, such as the user the request came from, or the token that it was signed with.
+
+# company sample
+
+```json
+{
+  "name": "HackerEarth",
+  "location": "Bangalore",
+  "email": "careers@hackerearth.com",
+  "phone": "9876543210",
+  "website": "https://www.hackerearth.com"
+}
+```
+
+# job sample
+
+```json
+{
+  "title": "Nodejs Developer",
+  "description": "Nodejs Developer",
+  "location": "Bangalore",
+  "salary": "10LPA",
+  "experience": "2-5 years",
+  "skills": ["Nodejs", "Express", "MongoDB"],
+  "type": "Full-time"
+},
+{
+  "title": "React Developer",
+  "description": "React Developer",
+  "location": "Bangalore",
+  "salary": "10LPA",
+  "experience": "2-5 years",
+  "skills": ["React", "Redux", "Javascript"],
+  "type": "Full-time"
+},
+{
+  "title": "Angular Developer",
+  "description": "Angular Developer",
+  "location": "Bangalore",
+  "salary": "10LPA",
+  "experience": "2-5 years",
+  "skills": ["Angular", "Typescript", "Javascript"],
+  "type": "Full-time"
+}
+```

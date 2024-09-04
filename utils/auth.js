@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('./config');
+const User = require('../models/user');
 
 const auth = {
     // Middleware to check if the user is authenticated
@@ -26,6 +27,26 @@ const auth = {
                 // call the next middleware
                 next();
             });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+    // Middleware to check if the user is an admin
+    isAdmin: async (req, res, next) => {
+        try {
+            // extract the userId from the request object
+            const { userId } = req;
+
+            // get the user from the database
+            const user = await User.findById(userId);
+
+            // check if the user is an admin
+            if (user.role !== 'admin') {
+                return res.status(403).json({ message: 'Forbidden' });
+            }
+
+            // call the next middleware
+            next();
         } catch (error) {
             res.status(500).json({ message: error.message });
         }

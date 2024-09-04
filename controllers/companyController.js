@@ -104,6 +104,21 @@ const companyController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
+    },
+    getCompanyJobs: async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            const company = await Company.findById(id).populate('jobs', '-companyId -__v');
+
+            if (!company) {
+                return res.status(404).json({ message: "Company not found" });
+            }
+
+            res.status(200).json(company.jobs);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
     }
 }
 
