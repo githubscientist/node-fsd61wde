@@ -82,6 +82,33 @@ const jobController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
+    },
+    applyJob: async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            const job = await Job.findById(id);
+
+            if (!job) {
+                return res.status(404).json({ message: 'Job not found' });
+            }
+
+            job.applicants.push(req.userId);
+
+            await job.save();
+
+            res.status(200).json({ message: 'Applied successfully' });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+    getAppliedJobs: async (req, res) => {
+        try {
+            const jobs = await Job.find({ applicants: req.userId }).populate('companyId', 'name -_id');
+            res.status(200).json(jobs);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
     }
 }
 

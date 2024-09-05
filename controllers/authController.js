@@ -74,7 +74,7 @@ const authController = {
         const userId = req.userId;
 
         // find the user in the database
-        const user = await User.findById(userId).select('-password -__v -_id -createdAt -updatedAt');
+        const user = await User.findById(userId).select('-password -__v -createdAt -updatedAt');
 
         // send the user details in the response
         res.status(200).json(user);
